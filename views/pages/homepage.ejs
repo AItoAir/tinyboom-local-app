@@ -1,6 +1,40 @@
 <div id="homepage" v-cloak>
   <div style="background-color: rgba(238, 245, 249, 0.72);" class="text-center py-5" purpose="scroll-destination">
-    <div class="container pt-3 pb-5" purpose="about-section">
+    <div class="container pt-3 pb-5">
+      <div class="row" v-if="isWebcamStreaming">
+        <div class="col-md-4 text-left">
+          <label for="selectedWebcam">Choose a webcam</label>
+          <select class="form-control form-control-sm mb-2" name="selectedWebcam" type="text" v-model.trim="selectedWebcam" @change="changeSelectedWebcam">
+            <option :value="o.deviceId" v-for="o in webcamList">{{o.label}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="text-left">
+            <video id="webcam1" autoplay playsinline width="500" height="400"></video>
+            <canvas id="canvas1" class="d-none"></canvas>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-2">
+            <button class="btn btn-lg btn-dark" style="width: 250px;">Load Images</button>
+          </div>
+          <div class="mb-4">
+            <button class="btn btn-lg btn-dark" style="width: 250px;">Load from Webcam</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="result-container text-left p-3">
+            <h3>Inference Result</h3>
+            <div class="results">
+              <p>- Human 99%</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

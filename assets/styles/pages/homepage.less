@@ -1,27 +1,13 @@
 #homepage {
-
-  [purpose='cloud-1'] {
-    .fly-fade();
-    opacity: 0;
+  .result-container {
+    background-color: #ddd;
+    height: 100px;
+    width: 500px;
+    h3 {
+      font-size: 16px;
     }
-  [purpose='cloud-2'] {
-    .fly-fade();
-    .animation-delay(3.5s);
-    opacity: 0;
-  }
-  [purpose='ship'] {
-    .skid();
-  }
-  [purpose='more-info-text'] {
-    .bob();
-  }
-  [purpose='setup-step'] {
-    padding-left: 240px;
-  }
-
-  @media (max-width: 991px) {
-    [purpose='setup-step'] {
-      padding-left: 0px;
+    .results {
+      font-size: 14px;
     }
   }
 }

@@ -1,42 +1,58 @@
 parasails.registerPage('homepage', {
-  //  ╦╔╗╔╦╔╦╗╦╔═╗╦    ╔═╗╔╦╗╔═╗╔╦╗╔═╗
-  //  ║║║║║ ║ ║╠═╣║    ╚═╗ ║ ╠═╣ ║ ║╣
-  //  ╩╝╚╝╩ ╩ ╩╩ ╩╩═╝  ╚═╝ ╩ ╩ ╩ ╩ ╚═╝
   data: {
-    //…
+    isWebcamStreaming: false,
+    webcam1: null,
+    webcamList: null,
+    selectedWebcam: null,
+    webcamInterval: null,
   },
 
-  //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗
-  //  ║  ║╠╣ ║╣ ║  ╚╦╝║  ║  ║╣
-  //  ╩═╝╩╚  ╚═╝╚═╝ ╩ ╚═╝╩═╝╚═╝
   beforeMount: function() {
     //…
   },
   mounted: async function(){
-    this._setHeroHeight();
+    await this.startWebcamImageStream();
   },
 
-  //  ╦╔╗╔╔╦╗╔═╗╦═╗╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
-  //  ║║║║ ║ ║╣ ╠╦╝╠═╣║   ║ ║║ ║║║║╚═╗
-  //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
   methods: {
-
-    clickHeroButton: async function() {
-      // Scroll to the 'get started' section:
-      $('html, body').animate({
-        scrollTop: this.$find('[purpose="scroll-destination"]').offset().top
+    snooze (ms) {
+      return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+      })
+    },
+    async startWebcamImageStream() {
+      this.isWebcamStreaming = true;
+      await this.snooze(100);
+      const webcamElement1 = document.getElementById('webcam1');
+      const canvasElement1 = document.getElementById('canvas1');
+      this.webcam1 = new Webcam(webcamElement1, 'user', canvasElement1);
+      const localThis = this;
+      const localWebcam = this.webcam1;
+      this.webcam1.start().then(result =>{
+        console.log("webcam1 started");
+        localThis.selectedWebcam = localWebcam.webcamList[0] ? localWebcam.webcamList[0].deviceId: null;
+        localThis.webcamList = localWebcam.webcamList;
+        console.log("this.webcam.webcamList", localWebcam.webcamList, localThis.selectedWebcam);
+      }).catch(err => { console.log(err); });
+      this.webcamInterval = setInterval(async function() {
+        const picture = localWebcam.snap('image/jpeg');
+        await localThis.doInference(picture);
       }, 500);
     },
-
-    // Private methods not tied to a particular DOM event are prefixed with _
-    _setHeroHeight: function() {
-      var $hero = this.$find('[purpose="full-page-hero"]');
-      var headerHeight = $('[purpose="page-header"]').outerHeight();
-      var heightToSet = $(window).height();
-      heightToSet = Math.max(heightToSet, 500);//« ensure min height of 500px - header height
-      heightToSet = Math.min(heightToSet, 1000);//« ensure max height of 1000px - header height
-      $hero.css('min-height', heightToSet - headerHeight+'px');
+    async doInference (picture) {
+      console.log(`doInference`, picture);
     },
-
+    changeSelectedWebcam () {
+      if (this.selectedWebcam) {
+        console.log("this.selectedWebcamm", this.selectedWebcam);
+        this.webcam1.selectedDeviceId = this.selectedWebcam;
+        this.webcam1.start().then(result =>{
+          console.log("webcam1 started");
+        }).catch(err => {
+          console.log(err);
+        });
+      }
+    }
   }
+
 });
