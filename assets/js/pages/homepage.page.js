@@ -5,6 +5,7 @@ parasails.registerPage('homepage', {
     webcamList: null,
     selectedWebcam: null,
     webcamInterval: null,
+    threshold: 0.5
   },
 
   beforeMount: function() {

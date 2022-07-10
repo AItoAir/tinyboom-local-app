@@ -26,12 +26,18 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
           <div class="result-container text-left p-3">
             <h3>Inference Result</h3>
             <div class="results">
               <p>- Human 99%</p>
             </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="text-left">
+            <label for="selectedWebcam">Threshold</label>
+            <input type="number" class="form-control form-control-sm" v-model.trim="threshold" max="1" min="0.01" step="0.01"/>
           </div>
         </div>
       </div>
