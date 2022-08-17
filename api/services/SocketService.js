@@ -19,7 +19,7 @@ function sendInferenceResult(data, req) {
   const jsonData = JSON.parse(utfData);
   console.log("sendInferenceResult: data received:", utfData, jsonData);
   if (req) {
-    const roomName = `inference-result-${_.deburr(this.req.sessionID)}`;
+    const roomName = `inference-result`;
     sails.sockets.broadcast(roomName, 'inference', { data: jsonData }, req);
   } else {
     console.log("sendInferenceResult: Missing req parameter");

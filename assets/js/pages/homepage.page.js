@@ -45,7 +45,8 @@ parasails.registerPage('homepage', {
       }, 500);
     },
     async doInference (picture) {
-      console.log(`doInference`, picture);
+      const cleanedImageData = picture.replace("data:image/jpeg;base64,", "");
+      console.log(`doInference`, cleanedImageData);
     },
     changeSelectedWebcam () {
       if (this.selectedWebcam) {

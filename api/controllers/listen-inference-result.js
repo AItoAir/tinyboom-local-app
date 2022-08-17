@@ -13,7 +13,7 @@ module.exports = {
       throw new Error('This action is designed for use with the virtual request interpreter (over sockets, not traditional HTTP).');
     }
 
-    const roomName = `inference-result-${_.deburr(this.req.sessionID)}`;
+    const roomName = `inference-result`;
     sails.sockets.join(this.req, roomName);
   }
 
