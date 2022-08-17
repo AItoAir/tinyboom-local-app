@@ -21,8 +21,11 @@ async function startSocketClient() {
     const client = net.createConnection(SOCKET_FILE);
     client.on("connect", function() {
       console.log("startSocketClient: Connected!");
+      SocketService.setSocketConnected(true);
+      SocketService.setSocketClient(client);
     });
     client.on("data", function(data) {
+      SocketService.sendInferenceResult(data);
     });
   }, 1000);
 }
