@@ -14,10 +14,16 @@ function setSocketClient(client) {
   oSocketClient = client;
 }
 
-function sendInferenceResult(data) {
+function sendInferenceResult(data, req) {
   const utfData = data.toString('utf8');
   const jsonData = JSON.parse(utfData);
-  console.log("data received:", utfData, jsonData);
+  console.log("sendInferenceResult: data received:", utfData, jsonData);
+  if (req) {
+    const roomName = `inference-result-${_.deburr(this.req.sessionID)}`;
+    sails.sockets.broadcast(roomName, 'inference', { data: jsonData }, req);
+  } else {
+    console.log("sendInferenceResult: Missing req parameter");
+  }
 }
 
 function sendImageData(base64Image) {

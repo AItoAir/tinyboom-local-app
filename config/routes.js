@@ -63,4 +63,6 @@ module.exports.routes = {
   // 'POST  /api/v1/deliver-contact-form-message':          { action: 'deliver-contact-form-message' },
   // 'POST  /api/v1/observe-my-session':                 { action: 'observe-my-session', hasSocketFeatures: true },
 
+  'GET /api/v1/listen-inference-result': { action: 'listen-inference-result', hasSocketFeatures: true },
+
 };

@@ -12,7 +12,11 @@ parasails.registerPage('homepage', {
     //…
   },
   mounted: async function(){
+    await Cloud.listenInferenceResult();
     await this.startWebcamImageStream();
+    Cloud.on('inference', (data) => {
+      console.log('inferenceData:', data);
+    });
   },
 
   methods: {
