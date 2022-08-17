@@ -20,8 +20,14 @@
           <div class="mb-2">
             <button class="btn btn-lg btn-dark" style="width: 250px;">Load Images</button>
           </div>
-          <div class="mb-4">
+          <div class="mb-2">
             <button class="btn btn-lg btn-dark" style="width: 250px;">Load from Webcam</button>
+          </div>
+          <div class="mb-2">
+            <button class="btn btn-lg btn-dark" style="width: 250px;" @click="startInference()">Start Inference</button>
+          </div>
+          <div class="mb-2">
+            <button class="btn btn-lg btn-dark" style="width: 250px;" @click="stopInference()">Stop Inference</button>
           </div>
         </div>
       </div>
@@ -30,7 +36,7 @@
           <div class="result-container text-left p-3">
             <h3>Inference Result</h3>
             <div class="results">
-              <p>- Human 99%</p>
+              <p v-for="r in inferenceResult">- {{r.class_name}} {{r.probability}}</p>
             </div>
           </div>
         </div>

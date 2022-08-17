@@ -14,15 +14,13 @@ function setSocketClient(client) {
   oSocketClient = client;
 }
 
-function sendInferenceResult(data, req) {
-  const utfData = data.toString('utf8');
-  const jsonData = JSON.parse(utfData);
-  console.log("sendInferenceResult: data received:", utfData, jsonData);
-  if (req) {
+function sendInferenceResult(data) {
+  const utfData = data.toString('utf8').replace('\x00','');
+  try {
     const roomName = `inference-result`;
-    sails.sockets.broadcast(roomName, 'inference', { data: jsonData }, req);
-  } else {
-    console.log("sendInferenceResult: Missing req parameter");
+    sails.sockets.broadcast(roomName, 'inference', { data: JSON.parse(utfData) });
+  } catch (e) {
+    console.log("sendInferenceResult:e", utfData, e);
   }
 }
 

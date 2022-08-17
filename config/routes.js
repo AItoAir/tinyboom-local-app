@@ -64,5 +64,6 @@ module.exports.routes = {
   // 'POST  /api/v1/observe-my-session':                 { action: 'observe-my-session', hasSocketFeatures: true },
 
   'GET /api/v1/listen-inference-result': { action: 'listen-inference-result', hasSocketFeatures: true },
+  'POST /api/v1/send-image-data':        { action: 'send-image-data' },
 
 };

@@ -5,7 +5,8 @@ parasails.registerPage('homepage', {
     webcamList: null,
     selectedWebcam: null,
     webcamInterval: null,
-    threshold: 0.5
+    threshold: 0.5,
+    inferenceResult: []
   },
 
   beforeMount: function() {
@@ -14,8 +15,10 @@ parasails.registerPage('homepage', {
   mounted: async function(){
     await Cloud.listenInferenceResult();
     await this.startWebcamImageStream();
+    const localThis = this;
     Cloud.on('inference', (data) => {
       console.log('inferenceData:', data);
+      localThis.inferenceResult = data.data
     });
   },
 
@@ -39,14 +42,11 @@ parasails.registerPage('homepage', {
         localThis.webcamList = localWebcam.webcamList;
         console.log("this.webcam.webcamList", localWebcam.webcamList, localThis.selectedWebcam);
       }).catch(err => { console.log(err); });
-      this.webcamInterval = setInterval(async function() {
-        const picture = localWebcam.snap('image/jpeg');
-        await localThis.doInference(picture);
-      }, 500);
     },
     async doInference (picture) {
       const cleanedImageData = picture.replace("data:image/jpeg;base64,", "");
-      console.log(`doInference`, cleanedImageData);
+      // console.log(`doInference`, cleanedImageData);
+      await Cloud.sendImageData(cleanedImageData);
     },
     changeSelectedWebcam () {
       if (this.selectedWebcam) {
@@ -58,6 +58,18 @@ parasails.registerPage('homepage', {
           console.log(err);
         });
       }
+    },
+    startInference() {
+      const localThis = this;
+      const localWebcam = this.webcam1;
+      this.webcamInterval = setInterval(async function() {
+        const picture = localWebcam.snap('image/jpeg');
+        await localThis.doInference(picture);
+      }, 500);
+    },
+    stopInference() {
+      clearInterval(this.webcamInterval);
+      this.inferenceResult = [];
     }
   }
 

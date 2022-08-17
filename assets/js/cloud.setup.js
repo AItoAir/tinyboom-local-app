@@ -13,7 +13,7 @@
 Cloud.setup({
 
   /* eslint-disable */
-  methods: {"listenInferenceResult":{"verb":"GET","url":"/api/v1/listen-inference-result","args":[],"protocol":"io.socket"}}
+  methods: {"listenInferenceResult":{"verb":"GET","url":"/api/v1/listen-inference-result","args":[],"protocol":"io.socket"},"sendImageData":{"verb":"POST","url":"/api/v1/send-image-data","args":["data"]}}
   /* eslint-enable */
 
 });

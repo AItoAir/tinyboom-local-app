@@ -22,5 +22,6 @@ module.exports.policies = {
   'legal/view-privacy': true,
   'deliver-contact-form-message': true,
   'listen-inference-result': true,
+  'send-image-data': true
 
 };
