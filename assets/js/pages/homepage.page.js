@@ -19,7 +19,7 @@ parasails.registerPage('homepage', {
     const localThis = this;
     Cloud.on('inference', (data) => {
       console.log('inferenceData:', data);
-      localThis.inferenceResult = data.data
+      localThis.inferenceResult = data.data;
     });
   },
 

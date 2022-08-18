@@ -15,6 +15,9 @@
             <video id="webcam1" autoplay playsinline width="500" height="400"></video>
             <canvas id="canvas1" class="d-none"></canvas>
           </div>
+          <div class="tinyboom-bboxes">
+            <div v-for="(b, idx) in inferenceResult" class="bbox" :style="'top: ' + b.bbox[1] + 'px; left: ' + b.bbox[0] + 'px; width: ' + b.bbox[2] + 'px; height: ' + b.bbox[2] + 'px;'"></div>
+          </div>
         </div>
         <div class="col-md-5">
           <div class="mb-2">
