@@ -103,7 +103,7 @@ module.exports.custom = {
   // …
   ldLibPath: "/workarea/tmbs/Ubuntu2204_aarch64_img_dll",
   tbmCwd: "/workarea/tmbs",
-  tbmFile: "img_classifier.tbm",
+  tbmFile: "obj_detector.tbm",
   tbmSocketFile: "ex1.socket",
 
 };

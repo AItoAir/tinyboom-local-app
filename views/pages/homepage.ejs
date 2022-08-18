@@ -10,23 +10,20 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
           <div class="text-left">
             <video id="webcam1" autoplay playsinline width="500" height="400"></video>
             <canvas id="canvas1" class="d-none"></canvas>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
           <div class="mb-2">
             <button class="btn btn-lg btn-dark" style="width: 250px;">Load Images</button>
           </div>
-          <div class="mb-2">
-            <button class="btn btn-lg btn-dark" style="width: 250px;">Load from Webcam</button>
+          <div class="mb-2" v-if="!isWebcamInferencing">
+            <button class="btn btn-lg btn-dark" style="width: 250px;" @click="startInference()">Inference with WebCam</button>
           </div>
-          <div class="mb-2">
-            <button class="btn btn-lg btn-dark" style="width: 250px;" @click="startInference()">Start Inference</button>
-          </div>
-          <div class="mb-2">
+          <div class="mb-2" v-else>
             <button class="btn btn-lg btn-dark" style="width: 250px;" @click="stopInference()">Stop Inference</button>
           </div>
         </div>
@@ -35,8 +32,11 @@
         <div class="col-md-6">
           <div class="result-container text-left p-3">
             <h3>Inference Result</h3>
-            <div class="results">
-              <p v-for="r in inferenceResult">- {{r.class_name}} {{r.probability}}</p>
+            <div class="results" v-if="isWebcamInferencing">
+              <p v-for="r in inferenceResult">
+                <span v-if="r.class_name">- {{r.class_name}} {{r.probability}}</span>
+                <span v-else-if="r.bbox">- {{r.class}} {{r.score}}</span>
+              </p>
             </div>
           </div>
         </div>

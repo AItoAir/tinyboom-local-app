@@ -6,7 +6,8 @@ parasails.registerPage('homepage', {
     selectedWebcam: null,
     webcamInterval: null,
     threshold: 0.5,
-    inferenceResult: []
+    inferenceResult: [],
+    isWebcamInferencing: false
   },
 
   beforeMount: function() {
@@ -60,6 +61,7 @@ parasails.registerPage('homepage', {
       }
     },
     startInference() {
+      this.isWebcamInferencing = true;
       const localThis = this;
       const localWebcam = this.webcam1;
       this.webcamInterval = setInterval(async function() {
@@ -70,6 +72,7 @@ parasails.registerPage('homepage', {
     stopInference() {
       clearInterval(this.webcamInterval);
       this.inferenceResult = [];
+      this.isWebcamInferencing = false;
     }
   }
 
