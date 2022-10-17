@@ -55,7 +55,7 @@ To run this webapp (still in `tinyboom-local-app` directory):
 $ npm start
 ```
 
-In your browser, go to to access the Tinyboom Local App: http://localhost:1337
+In your browser, go to this url to access the Tinyboom Local App: http://localhost:1337
 
 ### Running the webapp inside a docker container
 Tinyboom Local App can be run inside a docker container but first you will need to build a docker image to run the webapp.
@@ -81,4 +81,4 @@ npm install
 npm start
 ```
 
-In your browser, go to to access the Tinyboom Local App: http://localhost:1338
+In your browser, go to this url to access the Tinyboom Local App: http://localhost:1338
