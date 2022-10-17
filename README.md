@@ -64,3 +64,17 @@ Use the following commands to build the docker image
 cd dockers/
 ./build.sh
 ```
+
+Place a copy of the DLL folder and TBM file inside the `tmbs` folder
+![tmbs setup](docs/tmbs-setup.png)
+
+After the building of docker image is completed, you can run the docker container using this command:
+```
+./run-docker.sh
+```
+Inside the docker container, build and launch the application:
+```
+cd workarea/tinyboom-local-app/
+npm install
+npm start
+```
