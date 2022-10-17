@@ -80,3 +80,5 @@ cd workarea/tinyboom-local-app/
 npm install
 npm start
 ```
+
+In your browser, go to to access the Tinyboom Local App: http://localhost:1338
