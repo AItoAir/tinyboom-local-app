@@ -31,8 +31,9 @@ To setup the webapp, you will need to update the following configuration attribu
   <br/>the path of the socket file relative to `tbmCwd`
 
 Example:
+Scroll to the bottom part of the file to see the following attributes
 ```
-{
+...
   ldLibPath: "/workarea/tmbs/Ubuntu2204_aarch64_img_dll",
   tbmCwd: "/workarea/tmbs",
   tbmFile: "obj_detector.tbm",
@@ -65,7 +66,8 @@ cd dockers/
 ./build.sh
 ```
 
-Place a copy of the DLL folder and TBM file inside the `tmbs` folder
+Place a copy of the DLL folder and TBM file inside the `tmbs` folder.
+
 ![tmbs setup](docs/tmbs-setup.png)
 
 After the building of docker image is completed, you can run the docker container using this command:
