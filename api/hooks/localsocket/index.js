@@ -1,9 +1,6 @@
 
 const net = require('net');
 const path = require('path');
-const SOCKET_DIR = "/workarea/tmbs/";
-const SOCKET_FILE = path.join(SOCKET_DIR, 'ex1.socket');
-
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
@@ -19,6 +16,7 @@ async function startPythonSocketService() {
 }
 
 async function startSocketClient() {
+  const SOCKET_FILE = path.join(sails.config.custom.tbmCwd, sails.config.custom.tbmSocketFile);
   setTimeout(async () => {
     try {
       const client = net.createConnection(SOCKET_FILE);
